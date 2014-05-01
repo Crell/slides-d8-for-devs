@@ -273,7 +273,6 @@ core: 8.x
             </aside>
           </section>
         </section>
-
         <section>
           <section>
             <h3>How do I...?</h3>
@@ -322,7 +321,58 @@ hugs.page:
             <img class="fragment" src="assets/hug-page-1.png" alt="The simple hug controller." />
           </section>
         </section>
+        <section>
+          <section>
+            <h3>How do I...?</h3>
+            <p class="bigtext">make content themeable</p>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.module</p>
+            <pre><code class="php" data-trim>
+function hugs_theme() {
+  $theme['hug_page'] = [
+    'variables' => array('from' => NULL, 'to' => NULL),
+    'template' => 'hug_page',
+  ];
 
+  return $theme;
+}
+            </code></pre>
+            <div class="fragment">
+              <p>/modules/hugs/template/hug_page.html.twig</p>
+              <pre><code class="twig" data-trim>
+  &lt;section>
+    {% trans %}
+      &lt;strong>{{ from }}&lt;/strong> hugs &lt;em>{{ to }}&lt;/em>
+    {% endtrans %}
+  &lt;/section>
+              </code></pre>
+            </div>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.module</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
+
+class HugsController extends ControllerBase {
+
+  public function hug($to, $from) {
+    return [
+      '#theme' => 'hug_page',
+      '#from' => $from,
+      '#to' => $to,
+    ];
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <img src="assets/hug-page-2.png" alt="Now the page is themed." />
+          </section>
+
+        </section>
 
 
         <div style="display:none;">
