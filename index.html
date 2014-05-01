@@ -54,8 +54,9 @@
       <div class="slides">
         <section>
           <h1>What to Expect from Drupal 8</h1>
+          <h2>(For developers)</h2>
           <p>
-            <small>Presented by <a href="http://www.garfieldtech.com/">Larry Garfield</a> and <a href="http://www.angrylittletree.com/">Jeff Eaton</a></small>
+            <small>Presented by <a href="http://www.garfieldtech.com/">Larry Garfield</a> (<a href="http://twitter.com/Crell">@Crell</a>)</small>
           </p>
         </section>
         <section>
@@ -70,6 +71,65 @@
           </ul>
         </section>
 
+        <section>
+          <section>
+            <p class="bigtext"><q>Drupal 8 is so different,<br />how will I ever learn it?</q></p>
+          </section>
+          <section>
+            <p class="bigtext">The more things change,<br />the more they stay the same</p>
+          </section>
+          <section>
+            <p>Many APIs are new</p>
+            <p class="topspace fragment">The concepts are much the same</p>
+            <p class="topspace fragment">New concepts are there to make life easier</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>The web in a nutshell</h2>
+          </section>
+          <section>
+            <h3>PHP 4 architecture</h3>
+            <img src="assets/architecture-php4.svg"  class="graphic" />
+          </section>
+          <section>
+            <h3>HTTP Architecture</h3>
+            <img src="assets/architecture-http.svg" class="graphic"/>
+          </section>
+          <section>
+            <h3>Symfony/HttpKernel architecture</h3>
+            <img src="assets/architecture-httpkernelinterface.svg" class="graphic"/>
+          </section>
+          <section>
+            <pre class="long_code"><code class="php" data-trim>
+interface HttpKernelInterface {
+  const MASTER_REQUEST = 1;
+  const SUB_REQUEST = 2;
+
+  /**
+   * Handles a Request to convert it to a Response.
+   *
+   * @param Request $request A Request instance
+   * @param integer $type    The type of the request
+   * @param Boolean $catch Whether to catch exceptions or not
+   *
+   * @return Response A Response instance
+   */
+  public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true);
+}
+            </code></pre>
+          </section>
+          <section>
+            <h3>HttpKernel pipeline</h3>
+            <img src="assets/architecture-httpkernel.svg" class="graphic"/>
+          </section>
+        </section>
+
+
+
+        <section>
+
+        </section>
 
 
         <div style="display:none;">
