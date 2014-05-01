@@ -82,6 +82,12 @@
             <p>Many APIs are new</p>
             <p class="topspace fragment">The concepts are much the same</p>
             <p class="topspace fragment">New concepts are there to make life easier</p>
+            <aside class="notes">
+              <ul>
+                <li>Focus on broad strokes, not specific API syntax.</li>
+                <li>Only a 1 hour talk; we can only go so far.</li>
+              </ul>
+            </aside>
           </section>
         </section>
         <section>
@@ -124,12 +130,199 @@ interface HttpKernelInterface {
             <img src="assets/architecture-httpkernel.svg" class="graphic"/>
           </section>
         </section>
+        <section>
+          <section>
+            <h2>Controllers</h2>
+            <p class="fragment roll-in">(The concept formerly known as page callbacks and now represented by a PHP callable...)</p>
+          </section>
+          <section>
+            <pre><code class="php" data-trim>
+use Symfony\Component\HttpFoundation\Response;
 
+class MyControllers {
 
+  public function hello() {
+    return new Response('&lt;html>&lt;body>Hello World&lt;/body>&lt;/html>');
+  }
+}
+</code></pre>
+          </section>
+          <section>
+            <pre><code class="php" data-trim>
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+class MyControllers {
+
+  public function hello() {
+    return new Response('&lt;html>&lt;body>Hello World&lt;/body>&lt;/html>');
+  }
+
+  public function helloJson() {
+    $data['Hello'] = 'World';
+    return new JsonResponse($data);
+  }
+}
+</code></pre>
+          </section>
+          <section>
+            <pre><code class="php" data-trim>
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+class MyControllers {
+
+  public function helloCsv() {
+    $lots_of_data = get_lots_of_data();
+
+    $response = new StreamedResponse();
+    $response->headers->set('Content-Type', 'text/csv');
+
+    $response->setCallback(function() use ($lots_of_data) {
+      foreach ($lots_of_data as $record) {
+        print implode(', ', $record) . PHP_EOL;
+      }
+    });
+
+    return $response;
+  }
+}
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Tip: Could we combine this with a StreamedResponse to send records on the fly? How?</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <pre><code class="php" data-trim>
+class MyControllers {
+
+  public function helloString() {
+    return "The view event will turn this into a response.";
+  }
+}
+</code></pre>
+          </section>
+          <section>
+            <pre><code class="php" data-trim>
+class MyControllers {
+
+  public function helloDrupal() {
+    return array(
+      '#theme' => 'a_drupal_render_array',
+      '#description' => 'Those still exist.',
+    );
+  }
+}
+</code></pre>
+          </section>
+          <section>
+            <code>/hello/world/{from}/{to}</code>
+            <pre><code class="php" data-trim>
+use Symfony\Component\HttpFoundation\Request;
+
+class MyControllers {
+
+  public function helloDrupal($to, $from, Request $request) {
+    return array(
+      '#theme' => 'love_letter',
+      '#from' => $from,
+      '#to' => $to,
+    );
+  }
+}
+</code></pre>
+          </section>
+          <section>
+          <h3>module.routing.yml</h3>
+          <pre><code class="yaml long_code" data-trim>
+hello.world:
+  path: '/hello/world/{from}/{to}'
+  defaults:
+    _content: '\Drupal\mymodule\Controller\HelloController::helloWorld'
+  requirements:
+    _permission: 'access content'
+    from: \s+
+    to: \s+
+</code></pre>
+          </section>
+        </section>
 
         <section>
-
+          <p><q>Gah, enough theory, how do I do stuff?</q></p>
         </section>
+
+        <section>
+          <section>
+            <h3>How do I...?</h3>
+            <p class="bigtext">define a module</p>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.info.yml</p>
+            <pre><code class="yaml" data-trim>
+name: Hugs
+description: Examples of hugs
+type: module
+core: 8.x
+            </code></pre>
+            <img class="fragment" src="assets/extend-hug.png" alt="The modules page, showing the hug module." />
+            <aside class="notes">
+              <ul>
+                <li>No .module file needed!</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>How do I...?</h3>
+            <p class="bigtext">make a page</p>
+          </section>
+          <section>
+            <p>/modules/hugs/src/Controller/HugsController.php</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
+
+class HugsController extends ControllerBase {
+
+  public function hug($to, $from) {
+    $message = $this->t('%from sends hugs to %to', [
+      '%from' => $from,
+      '%to' => $to,
+    ]);
+
+    return $message;
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.routing.yml</p>
+            <pre><code class="yaml" data-trim>
+hugs.hug:
+  path: /hug/{from}/{to}
+  defaults:
+    _content: 'Drupal\hugs\Controller\HugsController::hug'
+    _title: 'Hug!'
+  requirements:
+    _permission: 'access content'
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.menu_links.yml</p>
+            <pre><code class="yaml" data-trim>
+hugs.page:
+  title: Hugs
+  description: 'Show hugs from one person to another'
+  route_name: hugs.hug
+            </code></pre>
+            <img class="fragment" src="assets/hug-page-1.png" alt="The simple hug controller." />
+          </section>
+        </section>
+
 
 
         <div style="display:none;">
