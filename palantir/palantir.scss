@@ -161,6 +161,7 @@ body {
 .reveal section pre code {
   display: block; padding: 0.5em;
   background: $black;
+  max-height: none;
 }
 
 /*********************************************

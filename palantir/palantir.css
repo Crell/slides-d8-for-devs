@@ -136,7 +136,8 @@ body {
 .reveal section pre code {
   display: block;
   padding: 0.5em;
-  background: #1a2526; }
+  background: #1a2526;
+  max-height: none; }
 
 /*********************************************
  * AD HOC CUSTOM CLASSES (Originally by Larry)
