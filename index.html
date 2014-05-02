@@ -311,13 +311,6 @@ hugs.hug:
             </code></pre>
           </section>
           <section>
-            <p>/modules/hugs/hugs.menu_links.yml</p>
-            <pre><code class="yaml" data-trim>
-hugs.page:
-  title: Hugs
-  description: 'Show hugs from one person to another'
-  route_name: hugs.hug
-            </code></pre>
             <img class="fragment" src="assets/hug-page-1.png" alt="The simple hug controller." />
           </section>
         </section>
@@ -350,7 +343,7 @@ function hugs_theme() {
             </div>
           </section>
           <section>
-            <p>/modules/hugs/hugs.module</p>
+            <p>/modules/hugs/src/Controller/HugsController</p>
             <pre><code class="php" data-trim>
 namespace Drupal\hugs\Controller;
 
@@ -371,9 +364,177 @@ class HugsController extends ControllerBase {
           <section>
             <img src="assets/hug-page-2.png" alt="Now the page is themed." />
           </section>
-
         </section>
+       <section>
+          <section>
+            <h3>How do I...?</h3>
+            <p class="bigtext">make a make a config form</p>
+          </section>
+          <section>
+            <p>/modules/hugs/config/install/hugs.settings.yml</p>
+            <pre><code class="yaml" data-trim>
+default_count: 3
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/config/schema/hugs.settings.yml</p>
+            <pre><code class="yaml" data-trim>
+hugs.settings:
+  type: mapping
+  label: 'Hug module settings'
+  mapping:
+    default_count:
+      type: integer
+      label: 'Default hug count'
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/src/Form/ConfigForm.php</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs\Form;
 
+use Drupal\Core\Form\ConfigFormBase;
+
+class ConfigForm extends ConfigFormBase {
+  public function getFormId() {
+    return 'hug_config';
+  }
+
+  public function buildForm(array $form, array &$form_state) {
+    $config = $this->config('hugs.settings');
+
+    $form['default_count'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Default hug count'),
+      '#default_value' => $config->get('default_count'),
+    ];
+
+    return parent::buildForm($form, $form_state);
+  }
+
+  public function submitForm(array &$form, array &$form_state) {
+    parent::submitForm($form, $form_state);
+    $config = $this->config('hug.settings');
+    $config->set('default_count', $form_state['values']['default_count']);
+    $config->save();
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.routing.yml</p>
+            <pre><code class="yaml" data-trim>
+hugs.config:
+  path: /admin/config/system/hugs
+  defaults:
+    _form: 'Drupal\hugs\Form\ConfigForm'
+    _title: 'Hug configuration'
+  requirements:
+    _permission: 'configure hugs'
+            </code></pre>
+          </section>
+<section>
+            <p>/modules/hugs/hugs.module</p>
+            <pre><code class="php" data-trim>
+function hugs_permission() {
+  $perms['configure hugs'] = [
+    'title' => t('Configure the hugs system'),
+  ];
+
+  return $perms;
+}
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.menu_links.yml</p>
+            <pre><code class="yaml" data-trim>
+hugs.config:
+  title: 'Hugs configuration'
+  description: 'Configure the hugs system'
+  route_name: hugs.config
+  parent: system.admin_config_system
+            </code></pre>
+          </section>
+         <section>
+           <img src="assets/config-landing-page.png" alt="The menu item is now created" />
+         </section>
+         <section>
+           <img src="assets/hug-config.png" alt="The form has the field we specified" />
+           <aside class="notes">
+             <ul>
+               <li>HTML5 number field, so browser restricts for us</li>
+             </ul>
+           </aside>
+         </section>
+          <section>
+            <p>/modules/hugs/src/Controller/HugsController</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
+
+class HugsController extends ControllerBase {
+
+  public function hug($to, $from, $count) {
+    if (!$count) {
+      $count = $this->config('hugs.settings')->get('default_count');
+    }
+    return [
+      '#theme' => 'hug_page',
+      '#from' => $from,
+      '#to' => $to,
+      '#count' => $count
+    ];
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.routing.yml</p>
+            <pre><code class="yaml" data-trim>
+hugs.hug:
+  path: /hug/{from}/{to}/{count}
+  defaults:
+    _content: 'Drupal\hugs\Controller\HugsController::hug'
+    _title: 'Hug!'
+    count: 0
+  requirements:
+    _permission: 'access content'
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.module</p>
+            <pre><code class="php" data-trim>
+function hugs_theme() {
+  $theme['hug_page'] = [
+    'variables' => array('from' => NULL, 'to' => NULL, 'count' => NULL),
+    'template' => 'hug_page',
+  ];
+
+  return $theme;
+}
+            </code></pre>
+            <div class="fragment">
+              <p>/modules/hugs/template/hug_page.html.twig</p>
+              <pre><code class="twig" data-trim>
+&lt;section>
+  {% trans %}
+    &lt;strong>{{ from }}&lt;/strong> hugs &lt;em>{{ to }}&lt;/em> {{ count }} time.
+  {% plural count %}
+    &lt;strong>{{ from }}&lt;/strong> hugs &lt;em>{{ to }}&lt;/em> {{ count }} times.
+  {% endtrans %}
+&lt;/section>
+              </code></pre>
+            </div>
+          </section>
+         <section>
+           <img src="assets/hug-page-3.png" alt="We now see the default hug count." />
+         </section>
+         <section>
+           <img src="assets/hug-page-4.png" alt="The hug count is overridden by the URI." />
+         </section>
+
+       </section>
 
         <div style="display:none;">
 
