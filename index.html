@@ -571,7 +571,134 @@ function hugs_theme() {
             </aside>
           </section>
           <section>
-            <h3></h3>
+            <h3>Definitions</h3>
+            <ul>
+              <li class="fragment"><strong>Plugin</strong>: Swappable, user-defined piece of functionality</li>
+              <li class="fragment"><strong>Plugin Type</strong>: A class of inter-changeable plugins</li>
+              <li class="fragment"><strong>Discovery</strong>: Collecting/cataloging plugins</li>
+            </ul>
+            <p class="fragment" style="margin-top: 1em;">-- or --</p>
+            <ul style="margin-top: 1em;">
+              <li class="fragment"><strong>Plugin Type</strong>: Interface</li>
+              <li class="fragment"><strong>Plugin</strong>: Implementing class</li>
+              <li class="fragment"><strong>Discovery</strong>: "find all <code>instanceof</code>"</li>
+            </ul>
+            <p class="fragment" style="margin-top: 1em;">Plugins abstract/automate common OO practices</p>
+          </section>
+          <section>
+            <h3>Drupal 7 extensibility</h3>
+            <ul>
+              <li class="fragment">Info hooks</li>
+              <li class="fragment">Little else in common</li>
+              <li class="fragment">ctools plugins: PHP 4 yuck</li>
+              <li class="fragment">No actual commonality</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Drupal 8 extensibility</h3>
+            <ul>
+              <li class="fragment">Want user-configurable logic choices? Plugin</li>
+              <li class="fragment">Define interface, define manager class, done</li>
+            </ul>
+            <div style="margin-top: 1em;" class="fragment">
+              <p><q>Learn once, apply everywhere</q></p>
+              <p>&mdash;Lee Rowlands (core developer)</p>
+            </div>
+          </section>
+          <section>
+            <h3>Pluginified systems in Drupal 8</h3>
+            <ul style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2;">
+              <li>Actions</li>
+              <li>Blocks</li>
+              <li>Text formats</li>
+              <li>Fields</li>
+              <li>Widgets</li>
+              <li>Formatters</li>
+              <li>Image effects</li>
+              <li>Conditions</li>
+              <li>Mail backends</li>
+              <li>Archiver</li>
+              <li>Image toolkits</li>
+              <li>Aggregator (Fetcher, Parser, Processor)</li>
+              <li>Editor extensions</li>
+              <li>EntityReference selections</li>
+              <li>Migration</li>
+              <li>REST Resources</li>
+              <li>Search backends</li>
+              <li>Tours</li>
+              <li>All of Views&hellip;</li>
+            </ul>
+          </section>
+          <section>
+            <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs\Plugin\Block;
+
+use Drupal\block\BlockBase;
+
+/**
+ * Reports on hugability status.
+ *
+ * @Block(
+ *   id = "hugs_status",
+ *   admin_label = @Translation("Hug status"),
+ *   category = @Translation("System")
+ * )
+ */
+class HugStatus extends BlockBase {
+
+  public function build() {
+    return [
+      '#markup' => $this->t('This is a hug-enabled site'),
+    ];
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <img src="assets/hug-block-layout.png" alt="The blocks configuration page" />
+          </section>
+          <section>
+            <img src="assets/hug-block-config.png" alt="The hug block configuration page" />
+          </section>
+          <section>
+            <img src="assets/hug-block-display.png" alt="The hug block shown on a page" />
+          </section>
+          <section>
+            <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
+            <pre><code class="php" data-trim>
+class HugStatus extends BlockBase {
+
+  public function defaultConfiguration() {
+    return array('enabled' => 1);
+  }
+
+  public function blockForm($form, &$form_state) {
+    $form['enabled'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Hugging enabled'),
+      '#default_value' => $this->configuration['enabled'],
+    ];
+
+    return $form;
+  }
+
+  public function blockSubmit($form, &$form_state) {
+    $this->configuration['enabled'] = (bool)$form_state['values']['enabled'];
+  }
+
+  public function build() {
+    $message = $this->configuration['enabled']
+      ? $this->t('Now accepting hugs')
+      : $this->t('No hugs :-(');
+    return [
+      '#markup' => $message,
+    ];
+  }
+}            </code></pre>
+          </section>
+          <section>
+            <img src="assets/hug-block-config-2.png" alt="Hug configuration form, now with more options" />
           </section>
         </section>
 
