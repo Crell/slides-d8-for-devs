@@ -232,26 +232,50 @@ class MyControllers {
   }
 }
 </code></pre>
+            <div class="fragment">
+              <p>module.routing.yml</p>
+              <pre><code class="yaml long_code" data-trim>
+    hello.world:
+      path: '/hello/world/{from}/{to}'
+      defaults:
+        _content: '\Drupal\mymodule\Controller\HelloController::helloWorld'
+      requirements:
+        _permission: 'access content'
+        from: \s+
+        to: \s+
+    </code></pre>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <p><q>Gah, enough theory, how do I do stuff?</q></p>
           </section>
           <section>
-          <h3>module.routing.yml</h3>
-          <pre><code class="yaml long_code" data-trim>
-hello.world:
-  path: '/hello/world/{from}/{to}'
-  defaults:
-    _content: '\Drupal\mymodule\Controller\HelloController::helloWorld'
-  requirements:
-    _permission: 'access content'
-    from: \s+
-    to: \s+
-</code></pre>
+            <h3>Drupal in 2 steps:</h3>
+            <ol>
+              <li class="fragment">Build a tool</li>
+              <li class="fragment">Wire it up</li>
+            </ol>
+            <aside class="notes">
+              <ul>
+                <li>Don't solve a problem; build tools and connect them.</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h3>Drupal in 2 (other) steps:</h3>
+            <ol>
+              <li class="fragment">Extend a base class/interface</li>
+              <li class="fragment">Tell Drupal about it</li>
+            </ol>
+            <aside class="notes">
+              <ul>
+                <li>"Tell" could be YAML, Annotation, etc.</li>
+              </ul>
+            </aside>
           </section>
         </section>
-
-        <section>
-          <p><q>Gah, enough theory, how do I do stuff?</q></p>
-        </section>
-
         <section>
           <section>
             <h3>How do I...?</h3>
@@ -311,7 +335,7 @@ hugs.hug:
             </code></pre>
           </section>
           <section>
-            <img class="fragment" src="assets/hug-page-1.png" alt="The simple hug controller." />
+            <img src="assets/hug-page-1.png" alt="The simple hug controller." />
           </section>
         </section>
         <section>
@@ -334,11 +358,11 @@ function hugs_theme() {
             <div class="fragment">
               <p>/modules/hugs/template/hug_page.html.twig</p>
               <pre><code class="twig" data-trim>
-  &lt;section>
-    {% trans %}
-      &lt;strong>{{ from }}&lt;/strong> hugs &lt;em>{{ to }}&lt;/em>
-    {% endtrans %}
-  &lt;/section>
+&lt;section>
+  {% trans %}
+    &lt;strong>{{ from }}&lt;/strong> hugs &lt;em>{{ to }}&lt;/em>
+  {% endtrans %}
+&lt;/section>
               </code></pre>
             </div>
           </section>
@@ -375,10 +399,9 @@ class HugsController extends ControllerBase {
             <pre><code class="yaml" data-trim>
 default_count: 3
             </code></pre>
-          </section>
-          <section>
-            <p>/modules/hugs/config/schema/hugs.settings.yml</p>
-            <pre><code class="yaml" data-trim>
+            <div class="fragment" style="margin-top: 1em;">
+              <p>/modules/hugs/config/schema/hugs.settings.yml</p>
+              <pre><code class="yaml" data-trim>
 hugs.settings:
   type: mapping
   label: 'Hug module settings'
@@ -386,7 +409,8 @@ hugs.settings:
     default_count:
       type: integer
       label: 'Default hug count'
-            </code></pre>
+              </code></pre>
+            </div>
           </section>
           <section>
             <p>/modules/hugs/src/Form/ConfigForm.php</p>
@@ -432,6 +456,16 @@ hugs.config:
   requirements:
     _permission: 'configure hugs'
             </code></pre>
+            <div class="fragment" style="margin-top: 1em;">
+              <p>/modules/hugs/hugs.menu_links.yml</p>
+              <pre><code class="yaml" data-trim>
+hugs.config:
+  title: 'Hugs configuration'
+  description: 'Configure the hugs system'
+  route_name: hugs.config
+  parent: system.admin_config_system
+              </code></pre>
+            </div>
           </section>
 <section>
             <p>/modules/hugs/hugs.module</p>
@@ -445,16 +479,7 @@ function hugs_permission() {
 }
             </code></pre>
           </section>
-          <section>
-            <p>/modules/hugs/hugs.menu_links.yml</p>
-            <pre><code class="yaml" data-trim>
-hugs.config:
-  title: 'Hugs configuration'
-  description: 'Configure the hugs system'
-  route_name: hugs.config
-  parent: system.admin_config_system
-            </code></pre>
-          </section>
+
          <section>
            <img src="assets/config-landing-page.png" alt="The menu item is now created" />
          </section>
@@ -533,8 +558,22 @@ function hugs_theme() {
          <section>
            <img src="assets/hug-page-4.png" alt="The hug count is overridden by the URI." />
          </section>
-
        </section>
+
+        <section>
+          <section>
+            <h3>How do I...?</h3>
+            <p class="bigtext">make a block</p>
+            <aside class="notes">
+              <ul>
+                <li>A little exposition on this one...</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h3></h3>
+          </section>
+        </section>
 
         <div style="display:none;">
 
