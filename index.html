@@ -574,7 +574,7 @@ function hugs_theme() {
             <h3>Definitions</h3>
             <ul>
               <li class="fragment"><strong>Plugin</strong>: Swappable, user-defined piece of functionality</li>
-              <li class="fragment"><strong>Plugin Type</strong>: A class of inter-changeable plugins</li>
+              <li class="fragment"><strong>Plugin Type</strong>: A category of inter-changeable plugins</li>
               <li class="fragment"><strong>Discovery</strong>: Collecting/cataloging plugins</li>
             </ul>
             <p class="fragment" style="margin-top: 1em;">-- or --</p>
@@ -699,6 +699,137 @@ class HugStatus extends BlockBase {
           </section>
           <section>
             <img src="assets/hug-block-config-2.png" alt="Hug configuration form, now with more options" />
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>How do I...?</h3>
+            <p class="bigtext">Make a service</p>
+          </section>
+          <section>
+            <h3>Services</h3>
+            <ul>
+              <li class="fragment">"Object that does something"</li>
+              <li class="fragment">Stateless</li>
+              <li class="fragment">Usually only one of</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Only one of, but not a singleton! Doesn't self-enforce.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <p>/modules/hugs/src/HugTracker.php</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs;
+
+use Drupal\Core\State\StateInterface;
+
+class HugTracker {
+
+  protected $state;
+
+  public function __construct(StateInterface $state) {
+    $this->state = $state;
+  }
+
+  public function addHug($target_name) {
+    $this->state->set('hugs.last_recipient', $target_name);
+    return $this;
+  }
+
+  public function getLastRecipient() {
+    return $this->state->get('hugs.last_recipient');
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/hugs.services.yml</p>
+            <pre><code class="yaml" data-trim>
+services:
+  hugs.hug_tracker:
+    class: Drupal\hugs\HugTracker
+    arguments: ['@state']
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/src/Controller/HugsController.php</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\hugs\HugTracker;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+class HugsController extends ControllerBase {
+
+  protected $hugTracker;
+
+  public function __construct(HugTracker $tracker) {
+    $this->hugTracker = $tracker;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('hugs.hug_tracker'));
+  }
+
+  public function hug($to, $from, $count) {
+    $this->hugTracker->addHug($to);
+    if (!$count) {
+      $count = $this->config('hugs.settings')->get('default_count');
+    }
+    return [
+      '#theme' => 'hug_page',
+      '#from' => $from,
+      '#to' => $to,
+      '#count' => $count
+    ];
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
+            <pre><code class="php" data-trim>
+namespace Drupal\hugs\Plugin\Block;
+
+// use ...
+
+class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
+
+  protected $hugTracker;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, HugTracker $hugTracker) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->hugTracker = $hugTracker;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration, $plugin_id, $plugin_definition,
+      $container->get('hugs.hug_tracker')
+    );
+  }
+
+  public function build() {
+    $message = $this->t('No hugs :-(');
+    if ($this->configuration['enabled']) {
+      $message = $this->t('%to was the last person hugged', [
+        '%to' => $this->hugTracker->getLastRecipient()
+      ]);
+    }
+    return [
+      '#markup' => $message,
+    ];
+  }
+  // ...
+}
+            </code></pre>
+
+
           </section>
         </section>
 
