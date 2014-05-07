@@ -60,6 +60,9 @@
           </p>
         </section>
         <section>
+          <img src="palantir/palantirnet-logo-4c-reversed.svg" alt="Palantir.net Pays me!" style="width: 100%;" />
+        </section>
+        <section>
           <h2><a href="http://twitter.com/Crell">@Crell</a></h2>
           <img src="palantir/palantirnet-logo-4c-reversed.svg" alt="Palantir.net Pays me!" style="width: 300px; float: right;" />
           <ul>
@@ -69,8 +72,9 @@
             <li>Advisor, Drupal Association</li>
             <li>Loveable pedant</li>
           </ul>
+          <p style="margin-top: 1em;"><a href="http://bit.ly/palantir-d8-devs">http://bit.ly/palantir-d8-devs</a></p>
+          <p style="margin-top: 1em;"><a href="https://github.com/palantirnet/hugs">https://github.com/palantirnet/hugs</a></p>
         </section>
-
         <section>
           <section>
             <p class="bigtext"><q>Drupal 8 is so different,<br />how will I ever learn it?</q></p>
@@ -92,7 +96,7 @@
         </section>
         <section>
           <section>
-            <h2>The web in a nutshell</h2>
+            <h2>Just enough theory</h2>
           </section>
           <section>
             <h3>PHP 4 architecture</h3>
@@ -520,6 +524,7 @@ hugs.hug:
     count: 0
   requirements:
     _permission: 'access content'
+    count: \d+
             </code></pre>
           </section>
           <section>
@@ -911,32 +916,35 @@ class HugsController extends ControllerBase {
           </section>
         </section>
         <section>
-
+          <section>
+            <h3>Drupal in 2 steps:</h3>
+            <ol>
+              <li class="fragment">Build a tool</li>
+              <li class="fragment">Wire it up</li>
+            </ol>
+            <p class="fragment" style="margin-top: 1em;">The wiring may vary, the approach is the same</p>
+            <aside class="notes">
+              <ul>
+                <li></li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h3>Guidelines</h3>
+            <ul>
+              <li class="fragment">Small classes, smaller methods</li>
+              <li class="fragment">Thin controllers</li>
+              <li class="fragment">Logic in services</li>
+              <li class="fragment">Not a DB query in sight...</li>
+              <li class="fragment">If it's hard to unit test, you're probably doing it wrong</li>
+            </ul>
+          </section>
+          <section>
+            <img src="assets/drupal-8-logo.png"  style="height: 200px;" alt="Drupal 8" data-credit="https://drupal.org/node/2119739" />
+          </section>
         </section>
 
-        <div style="display:none;">
-
-Request/Response/Kernel
-*
-How do I make a page?
-* controllers/routing
-* Menus
-* Theming
-** Hooks
-How do I make a form?
-* CMI
-* State
-How do I mess with content?
-* Entity API
-How do I make a block/extend the system?
-* Blocks
-* Plugins
-* Services
-How do I something?
-
-        </div>
-
-        <section id="final-slide">
+        <section id="final">
           <h2>Larry Garfield</h2>
           <p>Senior Architect, <a href="http://www.palantir.net/">Palantir.net</a></p>
           <p>Making the Web a Better Place</p>
