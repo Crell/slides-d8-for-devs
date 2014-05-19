@@ -60,9 +60,6 @@
           </p>
         </section>
         <section>
-          <img src="palantir/palantirnet-logo-4c-reversed.svg" alt="Palantir.net Pays me!" style="width: 100%;" />
-        </section>
-        <section>
           <h2><a href="http://twitter.com/Crell">@Crell</a></h2>
           <img src="palantir/palantirnet-logo-4c-reversed.svg" alt="Palantir.net Pays me!" style="width: 300px; float: right;" />
           <ul>
@@ -72,20 +69,25 @@
             <li>Advisor, Drupal Association</li>
             <li>Loveable pedant</li>
           </ul>
-          <p style="margin-top: 1em;"><a href="http://bit.ly/palantir-d8-devs">http://bit.ly/palantir-d8-devs</a></p>
           <p style="margin-top: 1em;"><a href="https://github.com/palantirnet/hugs">https://github.com/palantirnet/hugs</a></p>
         </section>
         <section>
           <section>
-            <p class="bigtext"><q>Drupal 8 is so different,<br />how will I ever learn it?</q></p>
+              <blockquote>Drupal 8 is so different,<br />how will I ever learn it?</blockquote>
+              <p>&mdash;Drupal developers</p>
+              <div class="fragment" style="margin-top: 2em;">
+                  <blockquote>I hear Drupal 8 is finally not weird,<br /> does that mean I can learn it?</blockquote>
+                  <p>&mdash;Everyone else</p>
+              </div>
           </section>
           <section>
             <p class="bigtext">The more things change,<br />the more they stay the same</p>
           </section>
           <section>
-            <p>Many APIs are new</p>
-            <p class="topspace fragment">The concepts are much the same</p>
-            <p class="topspace fragment">New concepts are there to make life easier</p>
+            <p>The concepts are still Drupal</p>
+            <p class="fragment" style="margin-top: 1em;">The achitecture is modernized</p>
+            <p class="fragment" style="margin-top: 1em;">The APIs are more consistent</p>
+            <img class="fragment" src="assets/drupal-8-logo.png"  style="height: 250px; margin-top: 1em" alt="Drupal 8" data-credit="https://drupal.org/node/2119739" />
             <aside class="notes">
               <ul>
                 <li>Focus on broad strokes, not specific API syntax.</li>
@@ -220,7 +222,7 @@ class MyControllers {
             <pre><code class="php" data-trim>
 use Symfony\Component\HttpFoundation\Request;
 
-class MyControllers {
+class HelloController {
 
   public function helloDrupal($to, $from, Request $request) {
     return array(
@@ -234,14 +236,14 @@ class MyControllers {
             <div class="fragment">
               <p>module.routing.yml</p>
               <pre><code class="yaml long_code" data-trim>
-    hello.world:
-      path: '/hello/world/{from}/{to}'
-      defaults:
-        _content: '\Drupal\mymodule\Controller\HelloController::helloWorld'
-      requirements:
-        _permission: 'access content'
-        from: \s+
-        to: \s+
+hello.world:
+  path: '/hello/world/{from}/{to}'
+  defaults:
+    _content: '\Drupal\mymodule\Controller\HelloController::helloDrupal'
+  requirements:
+    _permission: 'access content'
+    from: \s+
+    to: \s+
     </code></pre>
             </div>
           </section>
@@ -950,6 +952,8 @@ class HugsController extends ControllerBase {
           <p>Making the Web a Better Place</p>
           <p>Keep tabs on our work at <a href="http://twitter.com/Palantir">@Palantir</a></p>
           <p>Want to hear about <a href="http://eepurl.com/ws6uj">what we're doing</a>?</p>
+
+          <p style="margin-top: 1em;"><a href=" https://joind.in/10615">https://joind.in/10615</a></p>
         </section>
       </div>
     </div>
