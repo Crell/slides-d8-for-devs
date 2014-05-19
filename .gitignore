@@ -5,3 +5,5 @@ tmp/**
 node_modules/
 .sass-cache
 /nbproject/private/
+.idea
+nbproject
