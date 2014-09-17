@@ -885,14 +885,15 @@ hugs.node:
             <pre><code class="php" data-trim>
 class HugsController extends ControllerBase {
 
+
   public function nodeHug(NodeInterface $node) {
     if ($node->isPublished()) {
       // These are the same!
       $body = $node->body->value;
       $body = $node->body[0]->value;
 
-      // Someone convert this function please.
-      $formatted = check_markup($body, $node->body->format);
+      // But we really want...
+      $formatted = $node->body->processed;
 
       $terms = [];
       foreach ($node->field_tags as $tag) {
@@ -951,11 +952,9 @@ class HugsController extends ControllerBase {
         <section id="final">
           <h2>Larry Garfield</h2>
           <p>Senior Architect, <a href="http://www.palantir.net/">Palantir.net</a></p>
-          <p>Making the Web a Better Place</p>
+          <p>Let's Make Something Good Together.</p>
           <p>Keep tabs on our work at <a href="http://twitter.com/Palantir">@Palantir</a></p>
           <p>Want to hear about <a href="http://eepurl.com/ws6uj">what we're doing</a>?</p>
-
-          <p style="margin-top: 1em;"><a href=" https://joind.in/10615">https://joind.in/10615</a></p>
         </section>
       </div>
     </div>
