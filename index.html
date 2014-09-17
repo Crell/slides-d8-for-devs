@@ -352,7 +352,7 @@ hugs.hug:
             <pre><code class="php" data-trim>
 function hugs_theme() {
   $theme['hug_page'] = [
-    'variables' => array('from' => NULL, 'to' => NULL),
+    'variables' => ['from' => NULL, 'to' => NULL],
     'template' => 'hug_page',
   ];
 
@@ -422,13 +422,14 @@ hugs.settings:
 namespace Drupal\hugs\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\FormStateInterface;
 
 class ConfigForm extends ConfigFormBase {
   public function getFormId() {
     return 'hug_config';
   }
 
-  public function buildForm(array $form, array &$form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('hugs.settings');
 
     $form['default_count'] = [
@@ -440,10 +441,11 @@ class ConfigForm extends ConfigFormBase {
     return parent::buildForm($form, $form_state);
   }
 
-  public function submitForm(array &$form, array &$form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
+
     $config = $this->config('hug.settings');
-    $config->set('default_count', $form_state['values']['default_count']);
+    $config->set('default_count', $form_state->getValue('default_count'));
     $config->save();
   }
 }
@@ -458,10 +460,18 @@ hugs.config:
     _form: 'Drupal\hugs\Form\ConfigForm'
     _title: 'Hug configuration'
   requirements:
-    _permission: 'configure hugs'
+    _permission: 'configure_hugs'
             </code></pre>
             <div class="fragment" style="margin-top: 1em;">
-              <p>/modules/hugs/hugs.menu_links.yml</p>
+              <p>/modules/hugs/hugs.permissions.yml</p>
+              <pre><code class="php" data-trim>
+                'configure_hugs':
+                title: 'Configure the hugs system'
+                description: 'Configure default hug count'
+              </code></pre>
+            </div>
+            <div class="fragment" style="margin-top: 1em;">
+              <p>/modules/hugs/hugs.links.menu.yml</p>
               <pre><code class="yaml" data-trim>
 hugs.config:
   title: 'Hugs configuration'
@@ -470,18 +480,6 @@ hugs.config:
   parent: system.admin_config_system
               </code></pre>
             </div>
-          </section>
-<section>
-            <p>/modules/hugs/hugs.module</p>
-            <pre><code class="php" data-trim>
-function hugs_permission() {
-  $perms['configure hugs'] = [
-    'title' => t('Configure the hugs system'),
-  ];
-
-  return $perms;
-}
-            </code></pre>
           </section>
 
          <section>
@@ -617,8 +615,8 @@ function hugs_theme() {
               <li>Blocks</li>
               <li>Text formats</li>
               <li>Fields</li>
-              <li>Widgets</li>
-              <li>Formatters</li>
+              <li>Field Widgets</li>
+              <li>Field Formatters</li>
               <li>Image effects</li>
               <li>Conditions</li>
               <li>Mail backends</li>
@@ -672,13 +670,14 @@ class HugStatus extends BlockBase {
           <section>
             <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
             <pre><code class="php" data-trim>
+
 class HugStatus extends BlockBase {
 
   public function defaultConfiguration() {
-    return array('enabled' => 1);
+    return ['enabled' => 1];
   }
 
-  public function blockForm($form, &$form_state) {
+  public function blockForm($form, FormStateInterface $form_state) {
     $form['enabled'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Hugging enabled'),
@@ -688,19 +687,19 @@ class HugStatus extends BlockBase {
     return $form;
   }
 
-  public function blockSubmit($form, &$form_state) {
-    $this->configuration['enabled'] = (bool)$form_state['values']['enabled'];
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    $this->configuration['enabled'] = (bool)$form_state->getValue('enabled');
   }
 
   public function build() {
     $message = $this->configuration['enabled']
       ? $this->t('Now accepting hugs')
       : $this->t('No hugs :-(');
-    return [
-      '#markup' => $message,
-    ];
+
+    return ['#markup' => $message];
   }
-}            </code></pre>
+}
+            </code></pre>
           </section>
           <section>
             <img src="assets/hug-block-config-2.png" alt="Hug configuration form, now with more options" />
