@@ -159,5 +159,5 @@ q:after {
 p.bigtext {
   font-size: 150%; }
 
-.reveal ul + p {
+.reveal ul + p, .reveal div + p {
   margin-top: 1em; }
