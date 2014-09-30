@@ -437,13 +437,11 @@ class ConfigForm extends ConfigFormBase {
       '#title' => $this->t('Default hug count'),
       '#default_value' => $config->get('default_count'),
     ];
-
     return parent::buildForm($form, $form_state);
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
-
     $config = $this->config('hug.settings');
     $config->set('default_count', $form_state->getValue('default_count'));
     $config->save();
@@ -465,9 +463,9 @@ hugs.config:
             <div class="fragment" style="margin-top: 1em;">
               <p>/modules/hugs/hugs.permissions.yml</p>
               <pre><code class="php" data-trim>
-                'configure_hugs':
-                title: 'Configure the hugs system'
-                description: 'Configure default hug count'
+configure_hugs:
+  title: 'Configure the hugs system'
+  description: 'Configure default hug count'
               </code></pre>
             </div>
             <div class="fragment" style="margin-top: 1em;">
@@ -672,7 +670,6 @@ class HugStatus extends BlockBase {
             <pre><code class="php" data-trim>
 
 class HugStatus extends BlockBase {
-
   public function defaultConfiguration() {
     return ['enabled' => 1];
   }
@@ -683,7 +680,6 @@ class HugStatus extends BlockBase {
       '#title' => $this->t('Hugging enabled'),
       '#default_value' => $this->configuration['enabled'],
     ];
-
     return $form;
   }
 
@@ -768,7 +764,6 @@ use Drupal\hugs\HugTracker;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class HugsController extends ControllerBase {
-
   protected $hugTracker;
 
   public function __construct(HugTracker $tracker) {
@@ -799,10 +794,7 @@ class HugsController extends ControllerBase {
             <pre><code class="php" data-trim>
 namespace Drupal\hugs\Plugin\Block;
 
-// use ...
-
 class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
-
   protected $hugTracker;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition, HugTracker $hugTracker) {
@@ -824,9 +816,7 @@ class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
         '@to' => $this->hugTracker->getLastRecipient()
       ]);
     }
-    return [
-      '#markup' => $message,
-    ];
+    return ['#markup' => $message];
   }
   // ...
 }
@@ -881,17 +871,14 @@ hugs.node:
             </code></pre>
           </section>
           <section>
-            <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
+            <p>/modules/hugs/src/Controller/HugsController.php</p>
             <pre><code class="php" data-trim>
 class HugsController extends ControllerBase {
-
-
   public function nodeHug(NodeInterface $node) {
     if ($node->isPublished()) {
       // These are the same!
       $body = $node->body->value;
       $body = $node->body[0]->value;
-
       // But we really want...
       $formatted = $node->body->processed;
 
