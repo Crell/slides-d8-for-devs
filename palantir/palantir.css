@@ -34,17 +34,14 @@ body {
 /*********************************************
  * HEADERS
  *********************************************/
-.reveal h1,
-.reveal h2,
-.reveal h3,
-.reveal h4,
-.reveal h5,
-.reveal h6 {
+.reveal section h1, .reveal section h2, .reveal section h3, .reveal section h4, .reveal section h5, .reveal section h6 {
   margin: 0 0 20px 0;
   color: #eeeeee;
   line-height: 0.9em;
   letter-spacing: -0.025em;
-  font-weight: 600; }
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, "Nimbus Sans L", sans-serif;
+  font-weight: 600;
+  text-transform: none; }
 
 /*********************************************
  * CALLOUT TEXT
@@ -137,7 +134,17 @@ body {
   display: block;
   padding: 0.5em;
   background: #1a2526;
-  max-height: none; }
+  max-height: none;
+  font-family: monospace;
+  overflow: auto;
+  font-size: 100%; }
+
+html.large .reveal .slides {
+  margin: auto;
+  margin-top: 1em; }
+
+section p:first-child {
+  margin-top: 0; }
 
 /*********************************************
  * AD HOC CUSTOM CLASSES (Originally by Larry)
