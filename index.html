@@ -201,16 +201,6 @@ class MyControllers {
             <pre><code class="php" data-trim>
 class MyControllers {
 
-  public function helloString() {
-    return "The view event will turn this into a response.";
-  }
-}
-</code></pre>
-          </section>
-          <section>
-            <pre><code class="php" data-trim>
-class MyControllers {
-
   public function helloDrupal() {
     return array(
       '#theme' => 'a_drupal_render_array',
@@ -242,7 +232,7 @@ class HelloController {
 hello.world:
   path: '/hello/world/{from}/{to}'
   defaults:
-    _content: '\Drupal\mymodule\Controller\HelloController::helloDrupal'
+    _controller: '\Drupal\mymodule\Controller\HelloController::helloDrupal'
   requirements:
     _permission: 'access content'
     from: \s+
@@ -332,7 +322,7 @@ class HugsController extends ControllerBase {
 hugs.hug:
   path: /hug/{from}/{to}
   defaults:
-    _content: 'Drupal\hugs\Controller\HugsController::hug'
+    _controller: 'Drupal\hugs\Controller\HugsController::hug'
     _title: 'Hug!'
   requirements:
     _permission: 'access content'
@@ -429,6 +419,10 @@ class ConfigForm extends ConfigFormBase {
     return 'hug_config';
   }
 
+  protected function getEditableConfigNames() {
+    return ['hugs.settings'];
+  }
+
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('hugs.settings');
 
@@ -520,7 +514,7 @@ class HugsController extends ControllerBase {
 hugs.hug:
   path: /hug/{from}/{to}/{count}
   defaults:
-    _content: 'Drupal\hugs\Controller\HugsController::hug'
+    _controller: 'Drupal\hugs\Controller\HugsController::hug'
     _title: 'Hug!'
     count: 0
   requirements:
@@ -533,7 +527,7 @@ hugs.hug:
             <pre><code class="php" data-trim>
 function hugs_theme() {
   $theme['hug_page'] = [
-    'variables' => array('from' => NULL, 'to' => NULL, 'count' => NULL),
+    'variables' => ['from' => NULL, 'to' => NULL, 'count' => NULL],
     'template' => 'hug_page',
   ];
 
@@ -865,7 +859,7 @@ class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
 hugs.node:
   path: /node/{node}/hug
   defaults:
-    _content: 'Drupal\hugs\Controller\HugsController::nodeHug'
+    _controller: 'Drupal\hugs\Controller\HugsController::nodeHug'
   requirements:
     _permission: 'access content'
             </code></pre>
@@ -897,7 +891,7 @@ class HugsController extends ControllerBase {
         '#markup' => $message . $formatted,
       ];
     }
-    return $this->t('Not published');
+    return ['#markup' => $this->t('Not published')];
   }
 }
             </code></pre>
@@ -917,7 +911,8 @@ class HugsController extends ControllerBase {
             <p class="fragment" style="margin-top: 1em;">The wiring may vary, the approach is the same</p>
             <aside class="notes">
               <ul>
-                <li></li>
+                <li>"What it is": Annotation</li>li>
+                <li>"Where it goes": YAML</li>
               </ul>
             </aside>
           </section>
