@@ -36,6 +36,14 @@
 
     <style type="text/css">
 
+    img.graphic {
+      width: 100%;
+    }
+
+    img.screenshot {
+      border-radius: 5px;
+    }
+
     ul.inline {
       margin: 0;
       padding: 0;
@@ -204,6 +212,18 @@ class MyControllers {
           </section>
           <section>
             <pre><code class="php" data-trim>
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+class MyControllers {
+
+  public function privateFile() {
+    return new BinaryFileResponse('secret_plans.odt');
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <pre><code class="php" data-trim>
 class MyControllers {
 
   public function helloDrupal() {
@@ -288,7 +308,7 @@ description: Examples of hugs
 type: module
 core: 8.x
             </code></pre>
-            <img class="fragment" src="assets/extend-hug.png" alt="The modules page, showing the hug module." />
+            <img class="fragment" src="assets/extend-hug.png" alt="The modules page, showing the hug module." class="screenshot" />
             <aside class="notes">
               <ul>
                 <li>No .module file needed!</li>
@@ -316,7 +336,7 @@ class HugsController extends ControllerBase {
       '%to' => $to,
     ]);
 
-    return $message;
+    return ['#markup' => $message];
   }
 }
             </code></pre>
@@ -334,7 +354,7 @@ hugs.hug:
             </code></pre>
           </section>
           <section>
-            <img src="assets/hug-page-1.png" alt="The simple hug controller." />
+            <img src="assets/hug-page-1.png" alt="The simple hug controller." class="screenshot" />
           </section>
         </section>
         <section>
@@ -385,7 +405,7 @@ class HugsController extends ControllerBase {
             </code></pre>
           </section>
           <section>
-            <img src="assets/hug-page-2.png" alt="Now the page is themed." />
+            <img src="assets/hug-page-2.png" alt="Now the page is themed." class="screenshot" />
           </section>
         </section>
        <section>
@@ -416,7 +436,6 @@ hugs.settings:
             <p>/modules/hugs/src/Form/ConfigForm.php</p>
             <pre><code class="php" data-trim>
 namespace Drupal\hugs\Form;
-
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -477,10 +496,10 @@ hugs.config:
           </section>
 
          <section>
-           <img src="assets/config-landing-page.png" alt="The menu item is now created" />
+           <img src="assets/config-landing-page.png" alt="The menu item is now created" class="screenshot" />
          </section>
          <section>
-           <img src="assets/hug-config.png" alt="The form has the field we specified" />
+           <img src="assets/hug-config.png" alt="The form has the field we specified" class="screenshot" />
            <aside class="notes">
              <ul>
                <li>HTML5 number field, so browser restricts for us</li>
@@ -550,10 +569,10 @@ function hugs_theme() {
             </div>
           </section>
          <section>
-           <img src="assets/hug-page-3.png" alt="We now see the default hug count." />
+           <img src="assets/hug-page-3.png" alt="We now see the default hug count." class="screenshot" />
          </section>
          <section>
-           <img src="assets/hug-page-4.png" alt="The hug count is overridden by the URI." />
+           <img src="assets/hug-page-4.png" alt="The hug count is overridden by the URI." class="screenshot" />
          </section>
        </section>
 
@@ -653,13 +672,13 @@ class HugStatus extends BlockBase {
             </code></pre>
           </section>
           <section>
-            <img src="assets/hug-block-layout.png" alt="The blocks configuration page" />
+            <img src="assets/hug-block-layout.png" alt="The blocks configuration page" class="screenshot" />
           </section>
           <section>
-            <img src="assets/hug-block-config.png" alt="The hug block configuration page" />
+            <img src="assets/hug-block-config.png" alt="The hug block configuration page" class="screenshot" />
           </section>
           <section>
-            <img src="assets/hug-block-display.png" alt="The hug block shown on a page" />
+            <img src="assets/hug-block-display.png" alt="The hug block shown on a page" class="screenshot" />
           </section>
           <section>
             <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
@@ -694,7 +713,7 @@ class HugStatus extends BlockBase {
             </code></pre>
           </section>
           <section>
-            <img src="assets/hug-block-config-2.png" alt="Hug configuration form, now with more options" />
+            <img src="assets/hug-block-config-2.png" alt="Hug configuration form, now with more options" class="screenshot" />
           </section>
         </section>
         <section>
@@ -754,7 +773,6 @@ services:
             <p>/modules/hugs/src/Controller/HugsController.php</p>
             <pre><code class="php" data-trim>
 namespace Drupal\hugs\Controller;
-
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\hugs\HugTracker;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -772,14 +790,11 @@ class HugsController extends ControllerBase {
 
   public function hug($to, $from, $count) {
     $this->hugTracker->addHug($to);
-    if (!$count) {
-      $count = $this->config('hugs.settings')->get('default_count');
-    }
     return [
       '#theme' => 'hug_page',
       '#from' => $from,
       '#to' => $to,
-      '#count' => $count
+      '#count' => $count ?: $this->config('hugs.settings')->get('default_count'),
     ];
   }
 }
@@ -819,7 +834,7 @@ class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
             </code></pre>
           </section>
           <section>
-             <img src="assets/hug-block-state.png" alt="The block is now populated by our service." />
+             <img src="assets/hug-block-state.png" alt="The block is now populated by our service." class="screenshot" />
           </section>
         </section>
         <section>
@@ -853,7 +868,7 @@ class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
             </ul>
           </section>
           <section>
-            <img src="assets/hug-edit-page.png" alt="An article with a few fields." />
+            <img src="assets/hug-edit-page.png" alt="An article with a few fields." class="screenshot" />
           </section>
           <section>
             <p>/modules/hugs/hugs.routing.yml</p>
@@ -878,14 +893,12 @@ class HugsController extends ControllerBase {
       // But we really want...
       $formatted = $node->body->processed;
 
-      $terms = [];
       foreach ($node->field_tags as $tag) {
         $terms[] = $tag->entity->label();
       }
 
       $message = $this->t('Everyone hug @name because @reasons!', [
-        '@name' => $node->getOwner()->label(),
-        '@reasons' => implode(', ', $terms),
+        '@name' => $node->getOwner()->label(), '@reasons' => implode(', ', $terms),
       ]);
 
       return [
@@ -900,7 +913,7 @@ class HugsController extends ControllerBase {
             <p class="fragment">Actually that should probably all be in a template...</p>
           </section>
           <section>
-            <img src="assets/hug-node-page.png" alt="Our extra page." />
+            <img src="assets/hug-node-page.png" alt="Our extra page." class="screenshot" />
           </section>
         </section>
         <section>
@@ -938,7 +951,6 @@ class HugsController extends ControllerBase {
           <p>Senior Architect, <a href="http://www.palantir.net/">Palantir.net</a></p>
           <p>Let's Make Something Good Together.</p>
           <p>Keep tabs on our work at <a href="http://twitter.com/Palantir">@Palantir</a></p>
-          <p>Want to hear about <a href="http://bit.ly/DCamsterdam2014">what we're doing</a>?</p>
         </section>
       </div>
     </div>
