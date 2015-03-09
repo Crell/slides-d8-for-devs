@@ -13,20 +13,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.min.css">
     <link rel="stylesheet" href="palantir/palantir.css" id="theme">
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
-    <!-- Printing and PDF exports -->
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
     </script>
 
     <!--[if lt IE 9]>
@@ -129,7 +124,7 @@
             <img src="assets/architecture-httpkernelinterface.svg" class="graphic"/>
           </section>
           <section>
-            <pre><code class="php" data-trim>
+            <pre class="long_code"><code class="php" data-trim>
 interface HttpKernelInterface {
   const MASTER_REQUEST = 1;
   const SUB_REQUEST = 2;
@@ -431,7 +426,6 @@ hugs.settings:
               </code></pre>
             </div>
           </section>
-
           <section>
             <p>/modules/hugs/src/Form/ConfigForm.php</p>
             <pre><code class="php" data-trim>
@@ -440,9 +434,13 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 class ConfigForm extends ConfigFormBase {
-  public function getFormId() { return 'hug_config'; }
+  public function getFormId() {
+    return 'hug_config';
+  }
 
-  protected function getEditableConfigNames() { return ['hugs.settings']; }
+  protected function getEditableConfigNames() {
+    return ['hugs.settings'];
+  }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('hugs.settings');
@@ -645,7 +643,7 @@ function hugs_theme() {
               <li>All of Views&hellip;</li>
             </ul>
           </section>
-          <section data-state="large">
+          <section>
             <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
             <pre><code class="php" data-trim>
 namespace Drupal\hugs\Plugin\Block;
@@ -769,7 +767,7 @@ services:
     arguments: ['@state']
             </code></pre>
           </section>
-          <section data-state="large">
+          <section>
             <p>/modules/hugs/src/Controller/HugsController.php</p>
             <pre><code class="php" data-trim>
 namespace Drupal\hugs\Controller;
@@ -800,7 +798,7 @@ class HugsController extends ControllerBase {
 }
             </code></pre>
           </section>
-          <section data-state="large">
+          <section>
             <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
             <pre><code class="php" data-trim>
 namespace Drupal\hugs\Plugin\Block;
@@ -882,7 +880,7 @@ hugs.node:
             </code></pre>
           </section>
           <section data-state="large">
-            <!--<p>/modules/hugs/src/Controller/HugsController.php</p>-->
+            <p>/modules/hugs/src/Controller/HugsController.php</p>
             <pre><code class="php" data-trim>
 class HugsController extends ControllerBase {
   public function nodeHug(NodeInterface $node) {
@@ -960,11 +958,11 @@ class HugsController extends ControllerBase {
     </footer>
 
     <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.js"></script>
+    <script src="js/reveal.min.js"></script>
 
     <script>
 
-      // Full list of configuration options available at:
+      // Full list of configuration options available here:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
         controls: true,
@@ -972,16 +970,21 @@ class HugsController extends ControllerBase {
         history: true,
         center: true,
 
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-        // Optional reveal.js plugins
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
         dependencies: [
           { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true }
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
       });
 
