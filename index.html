@@ -117,7 +117,7 @@
             <img src="assets/architecture-httpkernelinterface.svg" class="graphic"/>
           </section>
           <section>
-            <pre class="long_code"><code class="php" data-trim>
+            <pre class="font--16"><code class="php" data-trim>
 interface HttpKernelInterface {
   const MASTER_REQUEST = 1;
   const SUB_REQUEST = 2;
@@ -143,10 +143,10 @@ interface HttpKernelInterface {
         <section>
           <section>
             <h2>Controllers</h2>
-            <p class="fragment roll-in">(The concept formerly known as page callbacks and now represented by a PHP callable...)</p>
+            <p class="fragment">The concept formerly known as page callbacks<br />and now represented by a ()</p>
           </section>
           <section>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 use Symfony\Component\HttpFoundation\Response;
 
 class MyControllers {
@@ -158,7 +158,7 @@ class MyControllers {
 </code></pre>
           </section>
           <section>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -176,7 +176,7 @@ class MyControllers {
 </code></pre>
           </section>
           <section>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class MyControllers {
@@ -199,7 +199,7 @@ class MyControllers {
             </code></pre>
           </section>
           <section>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class MyControllers {
@@ -211,7 +211,7 @@ class MyControllers {
             </code></pre>
           </section>
           <section>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 class MyControllers {
 
   public function helloDrupal() {
@@ -225,7 +225,7 @@ class MyControllers {
           </section>
           <section>
             <code>/hello/world/{from}/{to}</code>
-            <pre><code class="php" data-trim>
+            <pre class="font--18"><code class="php" data-trim>
 use Symfony\Component\HttpFoundation\Request;
 
 class HelloController {
@@ -241,7 +241,7 @@ class HelloController {
 </code></pre>
             <div class="fragment">
               <p>module.routing.yml</p>
-              <pre><code class="yaml long_code" data-trim>
+              <pre class="font--18"><code class="yaml long_code" data-trim>
 hello.world:
   path: '/hello/world/{from}/{to}'
   defaults:
@@ -290,7 +290,7 @@ hello.world:
           </section>
           <section>
             <p>/modules/hugs/hugs.info.yml</p>
-            <pre><code class="yaml" data-trim>
+            <pre class="font--24"><code class="yaml" data-trim>
 name: Hugs
 description: Examples of hugs
 type: module
@@ -311,7 +311,7 @@ core: 8.x
           </section>
           <section>
             <p>/modules/hugs/src/Controller/HugsController.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 namespace Drupal\hugs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
@@ -331,7 +331,7 @@ class HugsController extends ControllerBase {
           </section>
           <section>
             <p>/modules/hugs/hugs.routing.yml</p>
-            <pre><code class="yaml" data-trim>
+            <pre class="font--24"><code class="yaml" data-trim>
 hugs.hug:
   path: /hug/{from}/{to}
   defaults:
@@ -352,7 +352,7 @@ hugs.hug:
           </section>
           <section>
             <p>/modules/hugs/hugs.module</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 function hugs_theme() {
   $theme['hug_page'] = [
     'variables' => ['from' => NULL, 'to' => NULL],
@@ -364,7 +364,7 @@ function hugs_theme() {
             </code></pre>
             <div class="fragment">
               <p>/modules/hugs/template/hug_page.html.twig</p>
-              <pre><code class="twig" data-trim>
+              <pre class="font--24"><code class="twig" data-trim>
 &lt;section>
   {% trans %}
     &lt;strong>{{ from }}&lt;/strong> hugs &lt;em>{{ to }}&lt;/em>
@@ -375,7 +375,7 @@ function hugs_theme() {
           </section>
           <section>
             <p>/modules/hugs/src/Controller/HugsController</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 namespace Drupal\hugs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
@@ -403,12 +403,12 @@ class HugsController extends ControllerBase {
           </section>
           <section>
             <p>/modules/hugs/config/install/hugs.settings.yml</p>
-            <pre><code class="yaml" data-trim>
+            <pre class="font--24"><code class="yaml" data-trim>
 default_count: 3
             </code></pre>
             <div class="fragment" style="margin-top: 1em;">
               <p>/modules/hugs/config/schema/hugs.settings.yml</p>
-              <pre><code class="yaml" data-trim>
+              <pre class="font--24"><code class="yaml" data-trim>
 hugs.settings:
   type: mapping
   label: 'Hug module settings'
@@ -421,7 +421,7 @@ hugs.settings:
           </section>
           <section>
             <p>/modules/hugs/src/Form/ConfigForm.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--18"><code class="php" data-trim>
 namespace Drupal\hugs\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -455,7 +455,7 @@ class ConfigForm extends ConfigFormBase {
           </section>
           <section>
             <p>/modules/hugs/hugs.routing.yml</p>
-            <pre><code class="yaml" data-trim>
+            <pre class="font--24"><code class="yaml" data-trim>
 hugs.config:
   path: /admin/config/system/hugs
   defaults:
@@ -466,7 +466,7 @@ hugs.config:
             </code></pre>
             <div class="fragment" style="margin-top: 1em;">
               <p>/modules/hugs/hugs.permissions.yml</p>
-              <pre><code class="php" data-trim>
+              <pre class="font--24"><code class="php" data-trim>
 configure_hugs:
   title: 'Configure the hugs system'
   description: 'Configure default hug count'
@@ -474,7 +474,7 @@ configure_hugs:
             </div>
             <div class="fragment" style="margin-top: 1em;">
               <p>/modules/hugs/hugs.links.menu.yml</p>
-              <pre><code class="yaml" data-trim>
+              <pre class="font--24"><code class="yaml" data-trim>
 hugs.config:
   title: 'Hugs configuration'
   description: 'Configure the hugs system'
@@ -497,7 +497,7 @@ hugs.config:
          </section>
           <section>
             <p>/modules/hugs/src/Controller/HugsController</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--20"><code class="php" data-trim>
 namespace Drupal\hugs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
@@ -520,7 +520,7 @@ class HugsController extends ControllerBase {
           </section>
           <section>
             <p>/modules/hugs/hugs.routing.yml</p>
-            <pre><code class="yaml" data-trim>
+            <pre class="font--24"><code class="yaml" data-trim>
 hugs.hug:
   path: /hug/{from}/{to}/{count}
   defaults:
@@ -534,7 +534,7 @@ hugs.hug:
           </section>
           <section>
             <p>/modules/hugs/hugs.module</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--20"><code class="php" data-trim>
 function hugs_theme() {
   $theme['hug_page'] = [
     'variables' => ['from' => NULL, 'to' => NULL, 'count' => NULL],
@@ -546,7 +546,7 @@ function hugs_theme() {
             </code></pre>
             <div class="fragment">
               <p>/modules/hugs/template/hug_page.html.twig</p>
-              <pre><code class="twig" data-trim>
+              <pre class="font--20"><code class="twig" data-trim>
 &lt;section>
   {% trans %}
     &lt;strong>{{ from }}&lt;/strong> hugs &lt;em>{{ to }}&lt;/em> {{ count }} time.
@@ -636,7 +636,7 @@ function hugs_theme() {
           </section>
           <section>
             <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 namespace Drupal\hugs\Plugin\Block;
 
 use Drupal\block\BlockBase;
@@ -671,7 +671,7 @@ class HugStatus extends BlockBase {
           </section>
           <section>
             <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--20"><code class="php" data-trim>
 
 class HugStatus extends BlockBase {
   public function defaultConfiguration() {
@@ -725,7 +725,7 @@ class HugStatus extends BlockBase {
           </section>
           <section>
             <p>/modules/hugs/src/HugTracker.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--24"><code class="php" data-trim>
 namespace Drupal\hugs;
 
 use Drupal\Core\State\StateInterface;
@@ -751,7 +751,7 @@ class HugTracker {
           </section>
           <section>
             <p>/modules/hugs/hugs.services.yml</p>
-            <pre><code class="yaml" data-trim>
+            <pre class="font--24"><code class="yaml" data-trim>
 services:
   hugs.hug_tracker:
     class: Drupal\hugs\HugTracker
@@ -760,7 +760,7 @@ services:
           </section>
           <section>
             <p>/modules/hugs/src/Controller/HugsController.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--20"><code class="php" data-trim>
 namespace Drupal\hugs\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\hugs\HugTracker;
@@ -779,11 +779,12 @@ class HugsController extends ControllerBase {
 
   public function hug($to, $from, $count) {
     $this->hugTracker->addHug($to);
+    $count = $count ?: $this->config('hugs.settings')->get('default_count');
     return [
       '#theme' => 'hug_page',
       '#from' => $from,
       '#to' => $to,
-      '#count' => $count ?: $this->config('hugs.settings')->get('default_count'),
+      '#count' => $count,
     ];
   }
 }
@@ -791,18 +792,20 @@ class HugsController extends ControllerBase {
           </section>
           <section>
             <p>/modules/hugs/src/Plugin/Block/HugStatus.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--18"><code class="php" data-trim>
 namespace Drupal\hugs\Plugin\Block;
 
 class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
   protected $hugTracker;
 
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, HugTracker $hugTracker) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition,
+              HugTracker $hugTracker) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->hugTracker = $hugTracker;
   }
 
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container,
+              array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration, $plugin_id, $plugin_definition,
       $container->get('hugs.hug_tracker')
@@ -861,7 +864,7 @@ class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
           </section>
           <section>
             <p>/modules/hugs/hugs.routing.yml</p>
-            <pre><code class="yaml" data-trim>
+            <pre class="font--24"><code class="yaml" data-trim>
 hugs.node:
   path: /node/{node}/hug
   defaults:
@@ -872,13 +875,14 @@ hugs.node:
           </section>
           <section data-state="large">
             <p>/modules/hugs/src/Controller/HugsController.php</p>
-            <pre><code class="php" data-trim>
+            <pre class="font--18"><code class="php" data-trim>
 class HugsController extends ControllerBase {
   public function nodeHug(NodeInterface $node) {
     if ($node->isPublished()) {
       // These are the same!
       $body = $node->body->value;
       $body = $node->body[0]->value;
+
       // But we really want...
       $formatted = $node->body->processed;
 
