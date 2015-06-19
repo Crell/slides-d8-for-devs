@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="142 187.4 985.8 195.1" enable-background="new 142 187.4 985.8 195.1" xml:space="preserve">
+<g>
+	<path fill="#435152" d="M155.5,268h63c7.5,0,13.5,8.1,13.5,18s-6,18-13.5,18h-63c-7.5,0-13.5-8.1-13.5-18S148,268,155.5,268"/>
+	<text transform="matrix(1 0 0 1 160.9185 290.5)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">Request</text>
+	<path fill="#435152" d="M1038.1,265.5h71.8c8.5,0,15.4,9.2,15.4,20.5s-6.9,20.5-15.4,20.5h-71.8c-8.5,0-15.4-9.2-15.4-20.5
+		S1029.6,265.5,1038.1,265.5"/>
+	<text transform="matrix(1 0 0 1 1044.041 289.9995)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">Response</text>
+	<path fill="#435152" d="M475,268h81v36h-81V268z"/>
+	<text transform="matrix(1 0 0 1 483.7695 290.5)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">Controller</text>
+	<path fill="#435152" d="M250,268h90l-18,36h-54L250,268z"/>
+	<text transform="matrix(1 0 0 1 270.8994 282.7891)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">request</text>
+	<text transform="matrix(1 0 0 1 277.2485 296.7891)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">event</text>
+	<path fill="#435152" d="M358,268h90l-18,36h-54L358,268z"/>
+	<text transform="matrix(1 0 0 1 372.5854 282.7891)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">controller</text>
+	<text transform="matrix(1 0 0 1 385.2485 296.7891)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">event</text>
+	<path fill="#435152" d="M779.2,265h107.5l-21.5,43h-64.5L779.2,265z"/>
+	<text transform="matrix(1 0 0 1 818.877 281.7734)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">view</text>
+	<text transform="matrix(1 0 0 1 815.748 295.7734)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">event</text>
+	<path fill="#435152" d="M899.5,265h105l-21,42h-63L899.5,265z"/>
+	<text transform="matrix(1 0 0 1 922.251 281.6499)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">response</text>
+	<text transform="matrix(1 0 0 1 933.5977 295.6499)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">event</text>
+	<path fill="#435152" d="M1020.2,339.5h107.5l-21.5,43h-64.5L1020.2,339.5z"/>
+	<text transform="matrix(1 0 0 1 1043.8359 357.6953)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">terminate</text>
+	<text transform="matrix(1 0 0 1 1056.6738 371.6953)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">event</text>
+	<path fill="#435152" d="M648.5,249.5l67,36.5l-67,36.5l-67-36.5L648.5,249.5z"/>
+	<text transform="matrix(1 0 0 1 607.3691 289.5)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">is Response?</text>
+	
+		<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="232.5" y1="286.5" x2="249.6" y2="286.5"/>
+	<path fill="#E1EBEF" d="M257.6,286.5l-8-3v6L257.6,286.5z"/>
+	<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M257.6,286.5l-8-3v6L257.6,286.5z"/>
+	
+		<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="331.5" y1="286.5" x2="357.6" y2="286.5"/>
+	<path fill="#E1EBEF" d="M365.6,286.5l-8-3v6L365.6,286.5z"/>
+	<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M365.6,286.5l-8-3v6L365.6,286.5z"/>
+	<g>
+		
+			<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="556.5" y1="286.5" x2="573.6" y2="286.5"/>
+		<path fill="#E1EBEF" d="M581.6,286.5l-8-3v6L581.6,286.5z"/>
+		<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M581.6,286.5l-8-3v6L581.6,286.5z"/>
+	</g>
+	<g>
+		
+			<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="709.8" y1="286.5" x2="726.9" y2="286.5"/>
+		<path fill="#E1EBEF" d="M734.9,286.5l-8-3v6L734.9,286.5z"/>
+		<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M734.9,286.5l-8-3v6L734.9,286.5z"/>
+	</g>
+	<g>
+		
+			<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="760.9" y1="286.5" x2="783.8" y2="286.5"/>
+		<path fill="#E1EBEF" d="M791.8,286.5l-8-3v6L791.8,286.5z"/>
+		<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M791.8,286.5l-8-3v6L791.8,286.5z"/>
+	</g>
+	<g>
+		
+			<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="876.2" y1="286.5" x2="904" y2="286.5"/>
+		<path fill="#E1EBEF" d="M912,286.5l-8-3v6L912,286.5z"/>
+		<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M912,286.5l-8-3v6L912,286.5z"/>
+	</g>
+	<g>
+		
+			<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="987" y1="286.5" x2="1014.8" y2="286.5"/>
+		<path fill="#E1EBEF" d="M1022.8,286.5l-8-3v6L1022.8,286.5z"/>
+		<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M1022.8,286.5l-8-3v6L1022.8,286.5z"/>
+	</g>
+	<g>
+		
+			<line fill="#435152" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="715.5" y1="286" x2="818.3" y2="204.2"/>
+		<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M824.7,199.4l-8.2,2.4l3.6,4.8L824.7,199.4z"/>
+	</g>
+	<g>
+		
+			<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="853" y1="199.4" x2="946" y2="259.2"/>
+		<path fill="#E1EBEF" d="M952,264.5l-4-7.5l-4,4.5L952,264.5z"/>
+		<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M952,264.5l-4-7.5l-4,4.5L952,264.5z"/>
+	</g>
+	
+		<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="439.5" y1="286.5" x2="465.6" y2="286.5"/>
+	<path fill="#E1EBEF" d="M473.6,286.5l-8-3v6L473.6,286.5z"/>
+	<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M473.6,286.5l-8-3v6L473.6,286.5z"/>
+	<path fill="#435152" d="M824,187.4h29v24h-29V187.4z"/>
+	<text transform="matrix(1 0 0 1 826.7754 203.8965)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">Yes</text>
+	<path fill="#435152" d="M734.9,274.5h26v24h-26V274.5z"/>
+	<text transform="matrix(1 0 0 1 738.4121 291.0054)" fill="#E1EBEF" font-family="'ProximaNova-Bold'" font-size="14">No</text>
+	
+		<line fill="none" stroke="#435152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="4,4" x1="1074.5" y1="304" x2="1074.5" y2="330.1"/>
+	<path fill="#E1EBEF" d="M1074.5,338.1l3-8h-6L1074.5,338.1z"/>
+	<path fill="#435152" stroke="#435152" stroke-miterlimit="10" d="M1074.5,338.1l3-8h-6L1074.5,338.1z"/>
+</g>
+</svg>
