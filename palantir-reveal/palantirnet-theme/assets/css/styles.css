@@ -2458,41 +2458,43 @@ body.dark {
 /* line 30, ../sass/_general.scss */
 .logo--2 {
   left: 245px;
-}
-/* line 34, ../sass/_general.scss */
-.logo--2:after {
-  background: url(../../../../assets/srijan-webinar-transparent.png);
   background-size: contain;
   background-repeat: no-repeat;
-  height: 50px;
+  width: 200px;
+  height: 55px;
+  margin: 0 0 1em 1em !important;
+}
+/* line 39, ../sass/_general.scss */
+.logo--2:after {
+  display: none;
 }
 
-/* line 42, ../sass/_general.scss */
+/* line 44, ../sass/_general.scss */
 .dark .reveal {
   color: #dbe8ec;
 }
-/* line 45, ../sass/_general.scss */
+/* line 47, ../sass/_general.scss */
 .dark .reveal .logo:after {
   background: url(../imgs/palantirnet-logo--reversed.svg);
 }
 
-/* line 50, ../sass/_general.scss */
+/* line 52, ../sass/_general.scss */
 .white .reveal,
 .light .reveal {
   color: #344041;
 }
-/* line 54, ../sass/_general.scss */
+/* line 56, ../sass/_general.scss */
 .white .reveal .logo:after,
 .light .reveal .logo:after {
   background: url(../imgs/palantirnet-logo.svg);
 }
 
-/* line 59, ../sass/_general.scss */
+/* line 61, ../sass/_general.scss */
 .l-2up > div {
   margin-bottom: 15px;
 }
 @media (min-width: 600px) {
-  /* line 59, ../sass/_general.scss */
+  /* line 61, ../sass/_general.scss */
   .l-2up > div {
     width: 48%;
     margin-bottom: 0;
@@ -2500,24 +2502,24 @@ body.dark {
     float: left;
     font-size: 0.85em;
   }
-  /* line 68, ../sass/_general.scss */
+  /* line 70, ../sass/_general.scss */
   .l-2up > div:nth-of-type(1n) {
     padding-right: 2%;
     padding-left: 0;
   }
-  /* line 73, ../sass/_general.scss */
+  /* line 75, ../sass/_general.scss */
   .l-2up > div:nth-of-type(2n) {
     padding-right: 0;
     padding-left: 2%;
   }
 }
 
-/* line 80, ../sass/_general.scss */
+/* line 82, ../sass/_general.scss */
 .l-3up > div {
   margin-bottom: 15px;
 }
 @media (min-width: 750px) {
-  /* line 80, ../sass/_general.scss */
+  /* line 82, ../sass/_general.scss */
   .l-3up > div {
     width: 31%;
     margin-bottom: 0;
@@ -2525,29 +2527,29 @@ body.dark {
     float: left;
     font-size: 0.7em;
   }
-  /* line 90, ../sass/_general.scss */
+  /* line 92, ../sass/_general.scss */
   .l-3up > div:nth-of-type(1n) {
     padding-right: 2%;
     padding-left: 0;
   }
-  /* line 95, ../sass/_general.scss */
+  /* line 97, ../sass/_general.scss */
   .l-3up > div:nth-of-type(2n) {
     padding-right: 1%;
     padding-left: 1%;
   }
-  /* line 100, ../sass/_general.scss */
+  /* line 102, ../sass/_general.scss */
   .l-3up > div:nth-of-type(3n) {
     padding-right: 0;
     padding-left: 2%;
   }
 }
 
-/* line 107, ../sass/_general.scss */
+/* line 109, ../sass/_general.scss */
 .l-4up > div {
   margin-bottom: 15px;
 }
 @media (min-width: 900px) {
-  /* line 107, ../sass/_general.scss */
+  /* line 109, ../sass/_general.scss */
   .l-4up > div {
     width: 23%;
     margin-bottom: 0;
@@ -2555,29 +2557,29 @@ body.dark {
     float: left;
     font-size: 0.5em;
   }
-  /* line 117, ../sass/_general.scss */
+  /* line 119, ../sass/_general.scss */
   .l-4up > div:nth-of-type(1n) {
     padding-right: 2%;
     padding-left: 0;
   }
-  /* line 122, ../sass/_general.scss */
+  /* line 124, ../sass/_general.scss */
   .l-4up > div:nth-of-type(2n) {
     padding-right: 1%;
     padding-left: 1%;
   }
-  /* line 127, ../sass/_general.scss */
+  /* line 129, ../sass/_general.scss */
   .l-4up > div:nth-of-type(3n) {
     padding-right: 1%;
     padding-left: 1%;
   }
-  /* line 132, ../sass/_general.scss */
+  /* line 134, ../sass/_general.scss */
   .l-4up > div:nth-of-type(4n) {
     padding-right: 0;
     padding-left: 2%;
   }
 }
 
-/* line 140, ../sass/_general.scss */
+/* line 142, ../sass/_general.scss */
 .reveal .attribute {
   font-size: 0.5em;
   color: #7f9aa0;
@@ -2588,12 +2590,12 @@ body.dark {
 /*********************************************
  * AD HOC CUSTOM CLASSES (Originally by Larry)
  *********************************************/
-/* line 151, ../sass/_general.scss */
+/* line 153, ../sass/_general.scss */
 p.bigtext {
   font-size: 150%;
 }
 
-/* line 156, ../sass/_general.scss */
+/* line 158, ../sass/_general.scss */
 .reveal ul + p, .reveal div + p {
   margin-top: 1em;
 }

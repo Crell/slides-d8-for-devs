@@ -30,12 +30,14 @@
 .logo--2 {
   @extend %logo;
   left: 245px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 55px;
+  margin: 0 0 1em 1em !important;
 
   &:after {
-    background: url(../../../../assets/srijan-webinar-transparent.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 50px;
+    display: none;
   }
 }
 
