@@ -5,6 +5,7 @@
  * @copyright Copyright (c) 2015 Palantir.net
  */
 
+%logo,
 .logo {
   position: absolute;
   bottom: 0;
@@ -23,6 +24,18 @@
     width: 200px;
     height: 32px;
     margin: 0 0 1em 1em;
+  }
+}
+
+.logo--2 {
+  @extend %logo;
+  left: 245px;
+
+  &:after {
+    background: url(../../../../assets/srijan-webinar-transparent.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 50px;
   }
 }
 
